@@ -1,5 +1,6 @@
 {% extends 'toko/base.html' %}
 {% load denim_filters %}
+{% load static %}
 
 {% block content %}
 <!-- Breadcrumb -->
@@ -16,11 +17,64 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Product Images -->
         <div class="p-6">
-            <div class="aspect-square bg-gray-100 rounded-xl overflow-hidden mb-4">
-                {% if produk.gambar %}
-                    <img src="{{ produk.gambar.url }}" alt="{{ produk.nama }}" 
-                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+            <!-- Image Slider Container -->
+            <div class="relative bg-gray-100 rounded-xl overflow-hidden mb-4" style="min-height: 400px;">
+                {% if produk.gambar or produk.gambar2 or produk.gambar3 or produk.gambar4 %}
+                    <!-- Slider Images -->
+                    <div class="relative w-full" style="height: 400px;">
+                        {% if produk.gambar %}
+                        <div class="slider-slide absolute inset-0 w-full h-full transition-opacity duration-500">
+                            <img src="{{ produk.gambar.url }}" alt="{{ produk.nama }} 1" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        {% endif %}
+                        {% if produk.gambar2 %}
+                        <div class="slider-slide absolute inset-0 w-full h-full transition-opacity duration-500 opacity-0">
+                            <img src="{{ produk.gambar2.url }}" alt="{{ produk.nama }} 2" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        {% endif %}
+                        {% if produk.gambar3 %}
+                        <div class="slider-slide absolute inset-0 w-full h-full transition-opacity duration-500 opacity-0">
+                            <img src="{{ produk.gambar3.url }}" alt="{{ produk.nama }} 3" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        {% endif %}
+                        {% if produk.gambar4 %}
+                        <div class="slider-slide absolute inset-0 w-full h-full transition-opacity duration-500 opacity-0">
+                            <img src="{{ produk.gambar4.url }}" alt="{{ produk.nama }} 4" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Navigation Arrows -->
+                    <button onclick="previousSlide()" 
+                            class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors z-10">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button onclick="nextSlide()" 
+                            class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors z-10">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    
+                    <!-- Slider Indicators -->
+                    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                        {% if produk.gambar %}
+                        <button onclick="goToSlide(0)" class="slider-indicator w-2 h-2 rounded-full bg-white/70 hover:bg-white transition-colors"></button>
+                        {% endif %}
+                        {% if produk.gambar2 %}
+                        <button onclick="goToSlide(1)" class="slider-indicator w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-colors"></button>
+                        {% endif %}
+                        {% if produk.gambar3 %}
+                        <button onclick="goToSlide(2)" class="slider-indicator w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-colors"></button>
+                        {% endif %}
+                        {% if produk.gambar4 %}
+                        <button onclick="goToSlide(3)" class="slider-indicator w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-colors"></button>
+                        {% endif %}
+                    </div>
                 {% else %}
+                    <!-- No Images Placeholder -->
                     <div class="w-full h-full flex items-center justify-center">
                         <i class="fas fa-tshirt text-gray-400 text-6xl"></i>
                     </div>
@@ -29,16 +83,48 @@
             
             <!-- Thumbnail Gallery -->
             <div class="grid grid-cols-4 gap-2">
+                <!-- Gambar 1 -->
                 {% if produk.gambar %}
-                    <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer hover:ring-2 hover:ring-denim-500">
-                        <img src="{{ produk.gambar.url }}" alt="{{ produk.nama }}" class="w-full h-full object-cover">
-                    </div>
-                    <!-- Placeholder thumbnails -->
-                    {% for i in "123" %}
-                    <div class="aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-image text-gray-400"></i>
-                    </div>
-                    {% endfor %}
+                <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer hover:ring-2 hover:ring-denim-500 ring-2 ring-denim-500" 
+                     onclick="changeMainImage('{{ produk.gambar.url }}', this)">
+                    <img src="{{ produk.gambar.url }}" alt="{{ produk.nama }} 1" class="w-full h-full object-cover">
+                </div>
+                {% endif %}
+                
+                <!-- Gambar 2 -->
+                {% if produk.gambar2 %}
+                <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer hover:ring-2 hover:ring-denim-500" 
+                     onclick="changeMainImage('{{ produk.gambar2.url }}', this)">
+                    <img src="{{ produk.gambar2.url }}" alt="{{ produk.nama }} 2" class="w-full h-full object-cover">
+                </div>
+                {% else %}
+                <div class="aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-image text-gray-400"></i>
+                </div>
+                {% endif %}
+                
+                <!-- Gambar 3 -->
+                {% if produk.gambar3 %}
+                <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer hover:ring-2 hover:ring-denim-500" 
+                     onclick="changeMainImage('{{ produk.gambar3.url }}', this)">
+                    <img src="{{ produk.gambar3.url }}" alt="{{ produk.nama }} 3" class="w-full h-full object-cover">
+                </div>
+                {% else %}
+                <div class="aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-image text-gray-400"></i>
+                </div>
+                {% endif %}
+                
+                <!-- Gambar 4 -->
+                {% if produk.gambar4 %}
+                <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer hover:ring-2 hover:ring-denim-500" 
+                     onclick="changeMainImage('{{ produk.gambar4.url }}', this)">
+                    <img src="{{ produk.gambar4.url }}" alt="{{ produk.nama }} 4" class="w-full h-full object-cover">
+                </div>
+                {% else %}
+                <div class="aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-image text-gray-400"></i>
+                </div>
                 {% endif %}
             </div>
         </div>
@@ -123,10 +209,10 @@
                             class="flex-1 bg-denim-900 text-white py-3 rounded-lg font-semibold hover:bg-denim-800 transition-colors">
                         <i class="fas fa-cart-plus mr-2"></i>Tambah ke Keranjang
                     </button>
-                    <a href="{% url 'checkout' %}" 
+                    <button type="button" onclick="buyNow()" 
                        class="bg-denim-700 text-white px-6 py-3 rounded-lg font-semibold hover:bg-denim-600 transition-colors">
                         <i class="fas fa-bolt mr-2"></i>Beli Langsung
-                    </a>
+                    </button>
                 </div>
             </form>
             {% else %}
@@ -177,12 +263,12 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {% for p in related_products %}
         <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden group">
-            <div class="relative">
+            <div class="relative aspect-square">
                 {% if p.gambar %}
                     <img src="{{ p.gambar.url }}" alt="{{ p.nama }}" 
-                         class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                 {% else %}
-                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                    <div class="w-full h-full bg-gray-200 flex items-center justify-center">
                         <i class="fas fa-tshirt text-gray-400 text-4xl"></i>
                     </div>
                 {% endif %}
@@ -207,7 +293,7 @@
                 
                 <div class="flex gap-2">
                     <a href="{% url 'detail' p.id %}" 
-                       class="flex-1 bg-denim-900 text-white py-2 rounded-lg hover:bg-denim-800 transition-colors text-center text-sm font-medium">
+                       class="bg-denim-900 text-white py-2 px-4 rounded-lg hover:bg-denim-800 transition-colors text-center text-sm font-medium min-w-[80px]">
                         <i class="fas fa-eye mr-1"></i>Detail
                     </a>
                     {% if p.stok > 0 %}
@@ -226,6 +312,11 @@
 
 <!-- JavaScript -->
 <script>
+// Image Slider Variables
+let currentSlide = 0;
+let slideInterval;
+const totalSlides = {{ total_images|default:0 }};
+
 // Quantity controls
 function decreaseQuantity() {
     const input = document.getElementById('quantity');
@@ -242,13 +333,112 @@ function increaseQuantity() {
     }
 }
 
+// Slider Functions
+function showSlide(index) {
+    const slides = document.querySelectorAll('.slider-slide');
+    const indicators = document.querySelectorAll('.slider-indicator');
+    
+    if (slides.length === 0) return;
+    
+    // Hide all slides
+    slides.forEach(slide => slide.classList.add('opacity-0'));
+    indicators.forEach(indicator => indicator.classList.remove('bg-white'));
+    indicators.forEach(indicator => indicator.classList.add('bg-white/50'));
+    
+    // Show current slide
+    if (slides[index]) {
+        slides[index].classList.remove('opacity-0');
+        if (indicators[index]) {
+            indicators[index].classList.remove('bg-white/50');
+            indicators[index].classList.add('bg-white');
+        }
+    }
+    
+    currentSlide = index;
+}
+
+function nextSlide() {
+    if (totalSlides <= 1) return;
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+    resetAutoSlide();
+}
+
+function previousSlide() {
+    if (totalSlides <= 1) return;
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+    resetAutoSlide();
+}
+
+function goToSlide(index) {
+    if (totalSlides <= 1 || index >= totalSlides) return;
+    currentSlide = index;
+    showSlide(currentSlide);
+    resetAutoSlide();
+}
+
+function startAutoSlide() {
+    if (totalSlides <= 1) return;
+    slideInterval = setInterval(nextSlide, 3000); // Auto-slide every 3 seconds
+}
+
+function stopAutoSlide() {
+    if (slideInterval) {
+        clearInterval(slideInterval);
+    }
+}
+
+function resetAutoSlide() {
+    stopAutoSlide();
+    startAutoSlide();
+}
+
+// Initialize slider on page load
+document.addEventListener('DOMContentLoaded', function() {
+    if (totalSlides > 1) {
+        showSlide(0);
+        startAutoSlide();
+        
+        // Pause auto-slide on hover
+        const sliderContainer = document.querySelector('.relative.aspect-square');
+        if (sliderContainer) {
+            sliderContainer.addEventListener('mouseenter', stopAutoSlide);
+            sliderContainer.addEventListener('mouseleave', startAutoSlide);
+        }
+    }
+});
+
+// Change main image function (for backward compatibility)
+function changeMainImage(imageUrl, thumbnailElement) {
+    // Find which slide corresponds to this image
+    const slides = document.querySelectorAll('.slider-slide');
+    for (let i = 0; i < slides.length; i++) {
+        const img = slides[i].querySelector('img');
+        if (img && img.src === imageUrl) {
+            goToSlide(i);
+            break;
+        }
+    }
+    
+    // Remove active class from all thumbnails
+    document.querySelectorAll('.thumbnail-active').forEach(thumb => {
+        thumb.classList.remove('ring-2', 'ring-denim-500');
+    });
+    
+    // Add active class to clicked thumbnail
+    if (thumbnailElement) {
+        thumbnailElement.classList.add('ring-2', 'ring-denim-500');
+    }
+}
+
 // Add to cart form submission
 document.getElementById('add-to-cart-form').addEventListener('submit', function(e) {
     e.preventDefault();
     showLoading();
     
     const formData = new FormData(this);
-    const productId = {{ produk.id }};
+    const productId = "{{ produk.id }}";
     
     fetch(`/add-to-cart/${productId}/`, {
         method: 'POST',
@@ -320,6 +510,39 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+// Buy Now function - langsung ke checkout
+function buyNow() {
+    showLoading();
+    
+    const quantity = document.getElementById('quantity').value;
+    const productId = "{{ produk.id }}";
+    
+    // Tambahkan produk ke keranjang dulu
+    const formData = new FormData();
+    formData.append('quantity', quantity);
+    formData.append('csrfmiddlewaretoken', getCookie('csrftoken'));
+    
+    fetch(`/add-to-cart/${productId}/`, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Langsung redirect ke checkout
+            window.location.href = "{% url 'checkout' %}";
+        } else {
+            hideLoading();
+            showNotification(data.message, 'error');
+        }
+    })
+    .catch(error => {
+        hideLoading();
+        showNotification('Terjadi kesalahan, silakan coba lagi', 'error');
+    });
+}
+
 </script>
 
 {% endblock %}

@@ -6,7 +6,8 @@
 <section class="bg-gradient-to-r from-denim-900 to-denim-700 text-white rounded-2xl p-8 mb-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div>
-            <p class="text-xl mb-6 text-denim-100">Koleksi denim terbaik dengan kualitas premium. Temukan celana jeans, jaket, dan aksesoris denim favorit Anda.</p>
+            <h1 class="text-4xl font-bold mb-4">Catty Denim</h1>
+            <p class="text-xl mb-6 text-denim-100">Crafted from high-quality denim that is durable, strong, and comfortable for everyday wear.</p>
             <div class="flex flex-col sm:flex-row gap-4">
                 <a href="#products" class="bg-white text-denim-900 px-6 py-3 rounded-lg font-semibold hover:bg-denim-50 transition-colors">
                     Lihat Koleksi
@@ -18,8 +19,8 @@
         </div>
         <div class="hidden md:block">
             <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center">
-                <i class="fas fa-tshirt text-6xl mb-4"></i>
-                <p class="text-lg">100% Original Denim</p>
+                <i class="fas fa-truck text-6xl mb-4"></i>
+                <p class="text-lg">Worldwide Shipping</p>
             </div>
         </div>
     </div>
@@ -48,37 +49,37 @@
         <div class="flex transition-transform duration-700 ease-in-out h-full" id="mainSlider">
             <!-- Image 1 -->
             <div class="relative w-full flex-shrink-0">
-                <img src="https://i.pinimg.com/originals/2f/33/4c/2f334c9baa2dc7eebafca5e600b1d083.jpg" 
+                <img src="https://i.pinimg.com/1200x/a7/ef/be/a7efbe1c1cc75d0e224b5bf0801eb7a7.jpg" 
                      alt="Denim Photography 1" 
                      class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div class="absolute bottom-8 left-8 text-white">
-                    <h2 class="text-4xl font-bold mb-2">Premium Denim Collection</h2>
-                    <p class="text-lg opacity-90">Kualitas terbaik untuk gaya Anda</p>
+                    <h2 class="text-4xl font-bold mb-2">Japan Collection Handmade</h2>
+                    <p class="text-lg opacity-90">Authentic Japanese Denim Craftmanship</p>
                 </div>
             </div>
             
             <!-- Image 2 -->
             <div class="relative w-full flex-shrink-0">
-                <img src="https://i.pinimg.com/originals/15/97/ed/1597ed7ebbcd4a2abb894e5eb59a0fad.jpg" 
+                <img src="https://i.pinimg.com/1200x/c9/75/f9/c975f9a904f994ef153d65c2a52fd5af.jpg" 
                      alt="Denim Photography 2" 
                      class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div class="absolute bottom-8 left-8 text-white">
-                    <h2 class="text-4xl font-bold mb-2">Urban Denim Style</h2>
-                    <p class="text-lg opacity-90">Tampil modern dengan denim berkualitas</p>
+                    <h2 class="text-4xl font-bold mb-2">Urban Street Style</h2>
+                    <p class="text-lg opacity-90">Modern Denim Collection</p>
                 </div>
             </div>
             
             <!-- Image 3 -->
             <div class="relative w-full flex-shrink-0">
-                <img src="https://i.pinimg.com/1200x/be/9a/0f/be9a0fb1ad68a510508fdf04fe0c32d3.jpg" 
+                <img src="https://i.pinimg.com/736x/f0/a1/62/f0a16232a6c203f4db5b54e567a5b933.jpg" 
                      alt="Denim Photography 3" 
                      class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div class="absolute bottom-8 left-8 text-white">
                     <h2 class="text-4xl font-bold mb-2">Classic Denim Heritage</h2>
-                    <p class="text-lg opacity-90">Warisan denim yang tak lekang waktu</p>
+                    <p class="text-lg opacity-90">I Can See Me In Your Eyes</p>
                 </div>
             </div>
         </div>
@@ -115,15 +116,16 @@
         <a href="#" class="text-denim-600 hover:text-denim-800 transition-colors">Lihat Semua</a>
     </div>
     
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {% for p in best_sellers %}
-        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden group">
-            <div class="relative">
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden group h-full flex flex-col">
+            <!-- Image Container -->
+            <div class="relative h-64 overflow-hidden">
                 {% if p.gambar %}
                     <img src="{{ p.gambar.url }}" alt="{{ p.nama }}" 
-                         class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                 {% else %}
-                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                    <div class="w-full h-full bg-gray-200 flex items-center justify-center">
                         <i class="fas fa-tshirt text-gray-400 text-4xl"></i>
                     </div>
                 {% endif %}
@@ -133,11 +135,6 @@
                     {% if p.is_best_seller %}
                         <span class="bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
                             <i class="fas fa-fire mr-1"></i>Best Seller
-                        </span>
-                    {% endif %}
-                    {% if p.diskon > 0 %}
-                        <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
-                            -{{ p.diskon }}%
                         </span>
                     {% endif %}
                 </div>
@@ -156,27 +153,39 @@
                 </div>
             </div>
             
-            <div class="p-4">
-                <h3 class="font-semibold text-lg text-denim-900 mb-2 line-clamp-2">{{ p.nama }}</h3>
-                <p class="text-sm text-gray-600 mb-3 line-clamp-2">{{ p.deskripsi|truncatewords:10 }}</p>
+            <!-- Product Info -->
+            <div class="p-4 flex flex-col h-full">
+                <!-- Title and Description -->
+                <div class="flex flex-col flex-1 mb-2">
+                    <h3 class="font-semibold text-lg text-denim-900 mb-2 line-clamp-2">{{ p.nama }}</h3>
+                    <p class="text-sm text-gray-600 flex-1 line-clamp-4">{{ p.deskripsi|truncatewords:40 }}</p>
+                </div>
                 
-                <div class="flex items-center justify-between mb-3">
-                    <div>
+                <!-- Price and Category -->
+                <div class="mb-2">
+                    <div class="text-right mb-2">
                         {% if p.diskon > 0 %}
-                            <span class="text-lg font-bold text-denim-900">Rp {{ p.get_harga_setelah_diskon|format_number }}</span>
-                            <span class="text-sm text-gray-400 line-through ml-2">Rp {{ p.harga|format_number }}</span>
+                            <div class="flex items-baseline gap-1 justify-end">
+                                <span class="text-lg font-bold text-denim-900">Rp {{ p.get_harga_setelah_diskon|format_number }}</span>
+                            </div>
+                            <div>
+                                <span class="text-sm text-gray-400 line-through">Rp {{ p.harga|format_number }}</span>
+                                <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded ml-2">-{{ p.diskon }}%</span>
+                            </div>
                         {% else %}
                             <span class="text-lg font-bold text-denim-900">Rp {{ p.harga|format_number }}</span>
                         {% endif %}
                     </div>
-                    <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                    
+                    <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full text-center inline-block max-w-[100px] truncate">
                         {{ p.get_kategori_display }}
                     </span>
                 </div>
                 
+                <!-- Buttons -->
                 <div class="flex gap-2">
                     <a href="{% url 'detail' p.id %}" 
-                       class="flex-1 bg-denim-900 text-white py-2 rounded-lg hover:bg-denim-800 transition-colors text-center text-sm font-medium">
+                       class="flex-1 bg-denim-900 text-white py-2 px-4 rounded-lg hover:bg-denim-800 transition-colors text-center text-sm font-medium">
                         <i class="fas fa-eye mr-1"></i>Detail
                     </a>
                     {% if p.stok > 0 %}
@@ -185,7 +194,7 @@
                             <input type="hidden" name="quantity" value="1">
                         </form>
                         <button onclick="addToCart({{ p.id }})" 
-                                class="bg-denim-600 text-white px-3 py-2 rounded-lg hover:bg-denim-700 transition-colors text-sm">
+                                class="bg-denim-600 text-white px-4 py-2 rounded-lg hover:bg-denim-700 transition-colors text-sm">
                             <i class="fas fa-cart-plus"></i>
                         </button>
                     {% endif %}
@@ -219,13 +228,14 @@
     
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {% for p in produk %}
-        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden group">
-            <div class="relative">
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden group h-full flex flex-col">
+            <!-- Image Container -->
+            <div class="relative h-64 overflow-hidden">
                 {% if p.gambar %}
                     <img src="{{ p.gambar.url }}" alt="{{ p.nama }}" 
-                         class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                 {% else %}
-                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                    <div class="w-full h-full bg-gray-200 flex items-center justify-center">
                         <i class="fas fa-tshirt text-gray-400 text-4xl"></i>
                     </div>
                 {% endif %}
@@ -235,11 +245,6 @@
                     {% if p.is_best_seller %}
                         <span class="bg-orange-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
                             <i class="fas fa-fire mr-1"></i>Best Seller
-                        </span>
-                    {% endif %}
-                    {% if p.diskon > 0 %}
-                        <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
-                            -{{ p.diskon }}%
                         </span>
                     {% endif %}
                 </div>
@@ -258,27 +263,39 @@
                 </div>
             </div>
             
-            <div class="p-4">
-                <h3 class="font-semibold text-lg text-denim-900 mb-2 line-clamp-2">{{ p.nama }}</h3>
-                <p class="text-sm text-gray-600 mb-3 line-clamp-2">{{ p.deskripsi|truncatewords:10 }}</p>
+            <!-- Product Info -->
+            <div class="p-4 flex flex-col h-full">
+                <!-- Title and Description -->
+                <div class="flex flex-col flex-1 mb-2">
+                    <h3 class="font-semibold text-lg text-denim-900 mb-2 line-clamp-2">{{ p.nama }}</h3>
+                    <p class="text-sm text-gray-600 flex-1 line-clamp-4">{{ p.deskripsi|truncatewords:40 }}</p>
+                </div>
                 
-                <div class="flex items-center justify-between mb-3">
-                    <div>
+                <!-- Price and Category -->
+                <div class="mb-2">
+                    <div class="text-right mb-2">
                         {% if p.diskon > 0 %}
-                            <span class="text-lg font-bold text-denim-900">Rp {{ p.get_harga_setelah_diskon|format_number }}</span>
-                            <span class="text-sm text-gray-400 line-through ml-2">Rp {{ p.harga|format_number }}</span>
+                            <div class="flex items-baseline gap-1 justify-end">
+                                <span class="text-lg font-bold text-denim-900">Rp {{ p.get_harga_setelah_diskon|format_number }}</span>
+                            </div>
+                            <div>
+                                <span class="text-sm text-gray-400 line-through">Rp {{ p.harga|format_number }}</span>
+                                <span class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded ml-2">-{{ p.diskon }}%</span>
+                            </div>
                         {% else %}
                             <span class="text-lg font-bold text-denim-900">Rp {{ p.harga|format_number }}</span>
                         {% endif %}
                     </div>
-                    <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                    
+                    <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full text-center inline-block max-w-[100px] truncate">
                         {{ p.get_kategori_display }}
                     </span>
                 </div>
                 
+                <!-- Buttons -->
                 <div class="flex gap-2">
                     <a href="{% url 'detail' p.id %}" 
-                       class="flex-1 bg-denim-900 text-white py-2 rounded-lg hover:bg-denim-800 transition-colors text-center text-sm font-medium">
+                       class="flex-1 bg-denim-900 text-white py-2 px-4 rounded-lg hover:bg-denim-800 transition-colors text-center text-sm font-medium">
                         <i class="fas fa-eye mr-1"></i>Detail
                     </a>
                     {% if p.stok > 0 %}
@@ -287,7 +304,7 @@
                             <input type="hidden" name="quantity" value="1">
                         </form>
                         <button onclick="addToCart({{ p.id }})" 
-                                class="bg-denim-600 text-white px-3 py-2 rounded-lg hover:bg-denim-700 transition-colors text-sm">
+                                class="bg-denim-600 text-white px-4 py-2 rounded-lg hover:bg-denim-700 transition-colors text-sm">
                             <i class="fas fa-cart-plus"></i>
                         </button>
                     {% endif %}

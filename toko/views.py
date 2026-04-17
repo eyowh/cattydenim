@@ -52,10 +52,22 @@ def detail_produk(request, id):
     cart_items, cart_total = get_cart(request)
     cart_count = sum(item['jumlah'] for item in cart_items)
     
+    # Count total images for slider
+    total_images = 0
+    if produk.gambar:
+        total_images += 1
+    if produk.gambar2:
+        total_images += 1
+    if produk.gambar3:
+        total_images += 1
+    if produk.gambar4:
+        total_images += 1
+    
     context = {
         'produk': produk,
         'related_products': related_products,
         'cart_count': cart_count,
+        'total_images': total_images,
     }
     return render(request, 'detail.html', context)
 

@@ -20,7 +20,7 @@ class ProdukAdmin(admin.ModelAdmin):
             'fields': ('harga', 'diskon', 'get_harga_setelah_diskon', 'stok')
         }),
         ('Gambar', {
-            'fields': ('gambar', 'gambar_preview')
+            'fields': ('gambar', 'gambar2', 'gambar3', 'gambar4', 'gambar_preview')
         }),
         ('Status', {
             'fields': ('is_best_seller',)
@@ -32,10 +32,23 @@ class ProdukAdmin(admin.ModelAdmin):
     )
     
     def gambar_preview(self, obj):
+        images = []
         if obj.gambar:
-            return format_html('<img src="{}" width="80" height="80" style="object-fit: cover; border-radius: 8px;" />', obj.gambar.url)
+            images.append(obj.gambar.url)
+        if obj.gambar2:
+            images.append(obj.gambar2.url)
+        if obj.gambar3:
+            images.append(obj.gambar3.url)
+        if obj.gambar4:
+            images.append(obj.gambar4.url)
+        
+        if images:
+            image_tags = []
+            for img_url in images[:4]:  # Max 4 images
+                image_tags.append(f'<img src="{img_url}" width="60" height="60" style="object-fit: cover; border-radius: 4px; margin: 2px;" />')
+            return format_html(''.join(image_tags))
         return "Tidak ada gambar"
-    gambar_preview.short_description = 'Preview'
+    gambar_preview.short_description = 'Preview Gambar'
 
 @admin.register(Pesanan)
 class PesananAdmin(admin.ModelAdmin):
